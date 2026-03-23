@@ -164,8 +164,9 @@
       position: sticky; top: 0; z-index: 100;
       background: var(--green);
       display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap;
       padding: 0 5vw;
-      height: 64px;
+      min-height: 64px;
     }
 
     .logo {
@@ -587,6 +588,12 @@
     .cta-call svg { width:16px; height:16px; fill:#fff; }
 
     /* ── FOOTER ── */
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 36px;
+    }
     footer {
       background: #111;
       color: rgba(255,255,255,0.4);
@@ -602,10 +609,204 @@
     footer a { color: rgba(255,255,255,0.35); text-decoration: none; }
     footer a:hover { color: var(--amber-l); }
 
+
+
+    /* Mobile nav hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 2px;
+      transition: all .25s;
+    }
+    .mobile-menu {
+      display: none;
+      width: 100%;
+      background: var(--green-l);
+      padding: 0;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height .3s ease, padding .3s;
+    }
+    .mobile-menu.open {
+      display: block;
+      max-height: 200px;
+      padding: 12px 0;
+    }
+    .mobile-menu a {
+      display: block;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: 10px 5vw;
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: background .2s;
+    }
+    .mobile-menu a:hover { background: rgba(255,255,255,0.08); }
     @media (max-width: 640px) {
+      .hamburger { display: flex; }
+    }
+
+    /* ── RESPONSIVE ── */
+
+    /* Tablet: 641px – 1024px */
+    @media (max-width: 1024px) {
+      nav { padding: 0 4vw; }
+      .hero { padding: 60px 4vw 80px; }
+      .filter-bar { margin: -28px 4vw 0; gap: 12px; }
+      section { padding: 64px 4vw; }
+      .cta-banner { padding: 48px 4vw; }
+      .listings-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-stats { gap: 28px; }
+      .nav-links { gap: 1.4rem; }
+    }
+
+    /* Mobile: up to 640px */
+    @media (max-width: 640px) {
+      /* Nav */
+      nav {
+        padding: 0 4vw;
+        height: auto;
+        flex-wrap: wrap;
+        gap: 0;
+        position: sticky; top: 0;
+      }
+      .nav-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 56px;
+      }
       .nav-links { display: none; }
-      .hero-stats { gap: 24px; }
-      .cta-banner { text-align: center; justify-content: center; }
+      .nav-social-mobile { display: none; }
+
+      /* Nav WhatsApp button — smaller on mobile */
+      .nav-wa {
+        padding: 7px 12px;
+        font-size: 0.8rem;
+      }
+
+      /* Social icons next to logo on mobile */
+      .nav-social-row {
+        display: flex !important;
+        align-items: center;
+        gap: 14px;
+        margin-right: 0;
+      }
+
+      /* Hero */
+      .hero { padding: 48px 5vw 72px; }
+      .hero h1 { font-size: 2.1rem; }
+      .hero p { font-size: 0.95rem; margin-bottom: 32px; }
+      .hero-stats {
+        flex-wrap: wrap;
+        gap: 20px 36px;
+        padding-top: 28px;
+      }
+      .hero-badge { font-size: 0.72rem; }
+
+      /* Filter bar */
+      .filter-bar {
+        margin: -24px 4vw 0;
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+        border-radius: 8px;
+      }
+      .filter-group { min-width: 100%; flex: unset; }
+      .filter-btn { width: 100%; padding: 12px; font-size: 0.95rem; }
+
+      /* Sections */
+      section { padding: 56px 5vw; }
+      .section-title { font-size: 1.7rem; }
+      .section-sub { font-size: 0.88rem; margin-bottom: 32px; }
+
+      /* Listings */
+      .listings-grid { grid-template-columns: 1fr; gap: 18px; }
+      .card-img { height: 180px; }
+
+      /* Why grid */
+      .why-grid { grid-template-columns: 1fr; gap: 16px; }
+      .why-card { padding: 24px 20px; }
+
+      /* Areas */
+      .areas-grid { gap: 8px; }
+      .area-pill { font-size: 0.82rem; padding: 7px 16px; }
+
+      /* CTA Banner */
+      .cta-banner {
+        padding: 40px 5vw;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        gap: 24px;
+      }
+      .cta-banner h2 { font-size: 1.5rem; }
+      .cta-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+      .cta-wa, .cta-call {
+        width: 100%;
+        justify-content: center;
+        padding: 13px 20px;
+        font-size: 0.95rem;
+      }
+
+      /* Footer */
+      footer {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+        padding: 32px 5vw;
+      }
+      footer > div {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+      }
+    }
+
+    /* Very small phones: up to 380px */
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 1.85rem; }
+      .stat-num { font-size: 1.6rem; }
+      .card-price { font-size: 1.25rem; }
+      .card-actions { flex-direction: column; }
+      .btn-wa, .btn-call { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+      }
+    }
+    @media (max-width: 480px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 900px) {
+      .filter-group { min-width: calc(50% - 8px); max-width: calc(50% - 8px); }
+      .filter-btn { width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .listings-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -619,7 +820,7 @@
     <li><a href="#areas">Areas</a></li>
     <li><a href="#why">Why Us</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:14px;margin-right:16px;">
+  <div class="nav-social-row" style="display:flex;align-items:center;gap:14px;margin-right:16px;">
     <a href="https://www.facebook.com/tn15property" target="_blank" rel="noopener" aria-label="Facebook" style="color:rgba(255,255,255,0.55);transition:color .2s;" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='rgba(255,255,255,0.55)'">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
     </a>
@@ -630,11 +831,20 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
     </a>
   </div>
-  <a href="https://wa.me/919XXXXXXXXX?text=Hi%2C%20I%20found%20your%20listing%20on%20TN15Property.com" class="nav-wa" target="_blank">
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="https://wa.me/919884346789?text=Hi%2C%20I%20found%20your%20listing%20on%20TN15Property.com" class="nav-wa" target="_blank">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     WhatsApp
   </a>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#listings" onclick="toggleMenu()">Listings</a>
+  <a href="#areas" onclick="toggleMenu()">Areas</a>
+  <a href="#why" onclick="toggleMenu()">Why Us</a>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -734,11 +944,11 @@
         <div class="card-price">₹18 Lakhs / Acre</div>
         <div class="card-price-note">Total: ₹81 Lakhs · Survey No. available on request</div>
         <div class="card-actions">
-          <a href="https://wa.me/919XXXXXXXXX?text=Hi%2C%20I%27m%20interested%20in%20the%204.5%20Acres%20Patta%20Land%20in%20Sankarapuram%20listed%20on%20TN15Property.com" class="btn-wa" target="_blank">
+          <a href="https://wa.me/919884346789?text=Hi%2C%20I%27m%20interested%20in%20the%204.5%20Acres%20Patta%20Land%20in%20Sankarapuram%20listed%20on%20TN15Property.com" class="btn-wa" target="_blank">
             <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
             WhatsApp
           </a>
-          <a href="tel:+919XXXXXXXXX" class="btn-call">
+          <a href="tel:+919884346789" class="btn-call">
             <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
             Call
           </a>
@@ -769,11 +979,11 @@
         <div class="card-price">₹22 Lakhs</div>
         <div class="card-price-note">₹1,222/sq.ft · Clear title · Patta in seller's name</div>
         <div class="card-actions">
-          <a href="https://wa.me/919XXXXXXXXX?text=Hi%2C%20I%27m%20interested%20in%20the%201800%20Sq.ft%20Plot%20near%20Kallakurichi%20Bus%20Stand%20on%20TN15Property.com" class="btn-wa" target="_blank">
+          <a href="https://wa.me/919884346789?text=Hi%2C%20I%27m%20interested%20in%20the%201800%20Sq.ft%20Plot%20near%20Kallakurichi%20Bus%20Stand%20on%20TN15Property.com" class="btn-wa" target="_blank">
             <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
             WhatsApp
           </a>
-          <a href="tel:+919XXXXXXXXX" class="btn-call">
+          <a href="tel:+919884346789" class="btn-call">
             <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
             Call
           </a>
@@ -804,11 +1014,11 @@
         <div class="card-price">₹12 Lakhs / Acre</div>
         <div class="card-price-note">Total: ₹27 Lakhs · Currently cultivating groundnut</div>
         <div class="card-actions">
-          <a href="https://wa.me/919XXXXXXXXX?text=Hi%2C%20I%27m%20interested%20in%20the%202.25%20Acres%20Farm%20Land%20in%20Chinnasalem%20on%20TN15Property.com" class="btn-wa" target="_blank">
+          <a href="https://wa.me/919884346789?text=Hi%2C%20I%27m%20interested%20in%20the%202.25%20Acres%20Farm%20Land%20in%20Chinnasalem%20on%20TN15Property.com" class="btn-wa" target="_blank">
             <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
             WhatsApp
           </a>
-          <a href="tel:+919XXXXXXXXX" class="btn-call">
+          <a href="tel:+919884346789" class="btn-call">
             <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
             Call
           </a>
@@ -885,11 +1095,11 @@
     <p>Get in touch directly — no forms, no waiting. Just a conversation.</p>
   </div>
   <div class="cta-actions">
-    <a href="https://wa.me/919XXXXXXXXX?text=Hi%2C%20I%27m%20looking%20for%20land%20or%20plots%20in%20Kallakurichi.%20Can%20you%20help%3F" class="cta-wa" target="_blank">
+    <a href="https://wa.me/919884346789?text=Hi%2C%20I%27m%20looking%20for%20land%20or%20plots%20in%20Kallakurichi.%20Can%20you%20help%3F" class="cta-wa" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
       WhatsApp Us
     </a>
-    <a href="tel:+919XXXXXXXXX" class="cta-call">
+    <a href="tel:+919884346789" class="cta-call">
       <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
       Call Now
     </a>
@@ -916,5 +1126,11 @@
     ]
   }
   </script>
+<script>
+function toggleMenu() {
+  var m = document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+</script>
 </body>
 </html>

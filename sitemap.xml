@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.tn15property.com/</loc>
+    <lastmod>2025-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Listings section -->
+  <url>
+    <loc>https://www.tn15property.com/#listings</loc>
+    <lastmod>2025-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Individual listings -->
+  <url>
+    <loc>https://www.tn15property.com/#listing-1</loc>
+    <lastmod>2025-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.tn15property.com/images/listing-1.jpg</image:loc>
+      <image:title>4.5 Acres Patta Agricultural Land – Sankarapuram Taluk, Kallakurichi</image:title>
+      <image:caption>4.5 acres verified patta land with canal irrigation and tar road access in Sankarapuram Taluk</image:caption>
+      <image:geo_location>Sankarapuram, Kallakurichi District, Tamil Nadu, India</image:geo_location>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.tn15property.com/#listing-2</loc>
+    <lastmod>2025-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.tn15property.com/images/listing-2.jpg</image:loc>
+      <image:title>1800 Sq.ft Corner Plot – Kallakurichi Town</image:title>
+      <image:caption>1800 sq.ft NA corner plot near Kallakurichi Bus Stand. North-east facing with EB connection.</image:caption>
+      <image:geo_location>Kallakurichi Town, Tamil Nadu, India</image:geo_location>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.tn15property.com/#listing-3</loc>
+    <lastmod>2025-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.tn15property.com/images/listing-3.jpg</image:loc>
+      <image:title>2.25 Acres Farm Land – Chinnasalem Taluk, Kallakurichi</image:title>
+      <image:caption>2.25 acres farm land with borewell in Chinnasalem Taluk. Red soil, currently cultivating groundnut.</image:caption>
+      <image:geo_location>Chinnasalem, Kallakurichi District, Tamil Nadu, India</image:geo_location>
+    </image:image>
+  </url>
+
+  <!-- Areas section -->
+  <url>
+    <loc>https://www.tn15property.com/#areas</loc>
+    <lastmod>2025-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Why Us section -->
+  <url>
+    <loc>https://www.tn15property.com/#why</loc>
+    <lastmod>2025-03-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
