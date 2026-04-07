@@ -1,24 +1,75 @@
 <!DOCTYPE html>
 <html lang="en-IN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TN15 Property | Land for Sale in Kallakurichi</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TN15 Property | Land for Sale in Kallakurichi</title>
 
-  <meta name="description" content="Verified land, farm land & plots in Kallakurichi district. Watch video tours and contact directly." />
+<meta name="description" content="Verified land, farm land & plots in Kallakurichi district. Watch video tours and contact directly via WhatsApp." />
 
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- React & Babel Scripts -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <style>
-    body { margin:0; font-family:'DM Sans', sans-serif; background:#f6f1e8; color:#333; }
-    * { box-sizing:border-box; }
-    h1, h2, h3 { margin-top:0; }
-  </style>
+<style>
+body { margin:0; font-family:'DM Sans', sans-serif; background:#f6f1e8; }
+h1,h2,h3 { margin:0; }
+
+.container { max-width:1200px; margin:auto; padding:20px; }
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
+}
+
+.card {
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid #ddd;
+  cursor:pointer;
+  transition:0.2s;
+}
+.card:hover { transform:translateY(-5px); }
+
+.btn {
+  display:block;
+  padding:10px;
+  text-align:center;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.btn-wa { background:#1a3d2b; color:#fff; }
+
+.filter {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+select {
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+.pagination {
+  text-align:center;
+  margin-top:20px;
+}
+.pagination button {
+  margin:5px;
+  padding:8px 12px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+</style>
 </head>
 
 <body>
@@ -26,103 +77,141 @@
 
 <script type="text/babel">
 
-const { useState } = React;
+const { useState, useMemo } = React;
 
-// Branding Colors
 const BRAND = {
-  green: "#1a3d2b",
-  cream: "#f6f1e8",
-  amber: "#c8973a",
-  border: "#ddd",
+  green:"#1a3d2b",
+  amber:"#c8973a"
 };
 
-// Listings Data
+// Replace with your number
+const WHATSAPP = "919999999999";
+
+// DATA
 const LISTINGS = [
-  { id:1, yt:"3JZ_D3ELwOQ", title:"4.5 Acres Patta Land", loc:"Sankarapuram", type:"Agricultural Land", price:"₹18L/acre"},
-  { id:2, yt:"dQw4w9WgXcQ", title:"1800 Sq.ft Plot", loc:"Kallakurichi", type:"Plot", price:"₹22 Lakhs"},
-  { id:3, yt:"LXb3EKWsInQ", title:"2.25 Acres Farm", loc:"Chinnasalem", type:"Farm Land", price:"₹12L/acre"},
-  { id:4, yt:"9bZkp7q19f0", title:"6 Acres Land", loc:"Ulundurpet", type:"Agricultural Land", price:"₹9L/acre"},
-  { id:5, yt:"kJQP7kiw5Fk", title:"50 Cents Plot", loc:"Kallakurichi", type:"Plot", price:"₹8 Lakhs"},
-  { id:6, yt:"JGwWNGJdvx8", title:"3 Acres Land", loc:"Tirukoilur", type:"Farm Land", price:"₹14L/acre"}
+  { id:1, yt:"3JZ_D3ELwOQ", title:"4.5 Acres Patta Land", loc:"Sankarapuram", type:"Agricultural", price:"₹18L/acre"},
+  { id:2, yt:"dQw4w9WgXcQ", title:"1800 Sq.ft Plot", loc:"Kallakurichi", type:"Plot", price:"₹22L"},
+  { id:3, yt:"LXb3EKWsInQ", title:"2.25 Acres Farm", loc:"Chinnasalem", type:"Farm", price:"₹12L/acre"},
+  { id:4, yt:"9bZkp7q19f0", title:"6 Acres Land", loc:"Ulundurpet", type:"Agricultural", price:"₹9L/acre"},
+  { id:5, yt:"kJQP7kiw5Fk", title:"50 Cents Plot", loc:"Kallakurichi", type:"Plot", price:"₹8L"},
+  { id:6, yt:"JGwWNGJdvx8", title:"3 Acres Land", loc:"Tirukoilur", type:"Farm", price:"₹14L/acre"},
+  { id:7, yt:"3JZ_D3ELwOQ", title:"1 Acre Land", loc:"Sankarapuram", type:"Agricultural", price:"₹10L"},
+  { id:8, yt:"LXb3EKWsInQ", title:"House Plot", loc:"Kallakurichi", type:"Plot", price:"₹6L"}
 ];
 
-// Modal Component for Video Playback
 function Modal({ video, onClose }) {
   return (
     <div onClick={onClose} style={{
       position:"fixed", inset:0, background:"rgba(0,0,0,0.85)",
-      display:"flex", alignItems:"center", justifyContent:"center", zIndex:1000
+      display:"flex", alignItems:"center", justifyContent:"center"
     }}>
-      <div onClick={e=>e.stopPropagation()} style={{width:"90%", maxWidth:800, position:"relative"}}>
-        <button onClick={onClose} style={{position:"absolute", top:-40, right:0, background:"none", border:"none", color:"white", fontSize:20, cursor:"pointer"}}>Close</button>
-        <iframe
-          width="100%" 
-          height="450"
-          /* Changed to youtube-nocookie and added origin parameter */
-          src={`https://youtube-nocookie.com{video}?autoplay=1&rel=0`}
-          frameBorder="0" 
-          allow="autoplay; encrypted-media; picture-in-picture"
+      <div onClick={e=>e.stopPropagation()} style={{width:"90%", maxWidth:800}}>
+        <iframe width="100%" height="450"
+          src={`https://www.youtube-nocookie.com/embed/${video}?autoplay=1`}
+          allow="autoplay; encrypted-media"
           allowFullScreen
-          /* This line fixes Error 153 */
-          referrerPolicy="strict-origin-when-cross-origin"
         />
       </div>
     </div>
   );
 }
 
-// Card Component
-function Card({ item, onClick }) {
+function Card({ item, open }) {
   return (
-    <div onClick={onClick} style={{
-      border:`1px solid ${BRAND.border}`, borderRadius:10, overflow:"hidden",
-      cursor:"pointer", background:"#fff", transition:"transform 0.2s",
-      ":hover": {transform: "translateY(-5px)"}
-    }}>
-      <img src={`https://img.youtube.com/vi/${item.yt}/mqdefault.jpg`} width="100%" height="auto" alt={item.title} style={{display:"block"}}/>
+    <div className="card" onClick={()=>open(item.yt)}>
+      <img src={`https://img.youtube.com/vi/${item.yt}/hqdefault.jpg`} width="100%"/>
       <div style={{padding:15}}>
-        <div style={{fontSize:"0.8rem", color:BRAND.amber, fontWeight:700, textTransform:"uppercase"}}>{item.type}</div>
-        <div style={{fontSize:"1.1rem", fontWeight:700, margin:"5px 0"}}>{item.title}</div>
-        <div style={{color:"#666", marginBottom:10}}>{item.loc}</div>
-        <div style={{color:BRAND.green, fontWeight:700, fontSize:"1.2rem"}}>{item.price}</div>
+        <div style={{color:BRAND.amber, fontSize:12, fontWeight:700}}>{item.type}</div>
+        <h3>{item.title}</h3>
+        <div style={{color:"#666"}}>{item.loc}</div>
+        <div style={{color:BRAND.green, fontWeight:700}}>{item.price}</div>
+
+        <a
+          href={`https://wa.me/${WHATSAPP}?text=Interested in ${item.title}`}
+          target="_blank"
+          className="btn btn-wa"
+          onClick={e=>e.stopPropagation()}
+        >
+          WhatsApp Enquiry
+        </a>
       </div>
     </div>
   );
 }
 
-// Main App
 function App() {
   const [modal,setModal]=useState(null);
+  const [loc,setLoc]=useState("");
+  const [type,setType]=useState("");
+  const [page,setPage]=useState(1);
+
+  const perPage = 4;
+
+  const filtered = useMemo(()=>{
+    return LISTINGS.filter(i =>
+      (!loc || i.loc===loc) &&
+      (!type || i.type===type)
+    );
+  },[loc,type]);
+
+  const totalPages = Math.ceil(filtered.length/perPage);
+
+  const paginated = filtered.slice(
+    (page-1)*perPage,
+    page*perPage
+  );
 
   return (
     <div>
+
       {/* HEADER */}
-      <div style={{background:BRAND.green, color:"#fff", padding:"30px 20px", textAlign:"center"}}>
-        <h1 style={{margin:0}}>TN15 Property</h1>
-        <p style={{margin:"10px 0 0", opacity:0.9}}>Verified Land, Farm Land & Plots in Kallakurichi District</p>
+      <div style={{background:BRAND.green, color:"#fff", padding:30, textAlign:"center"}}>
+        <h1>TN15 Property</h1>
+        <p>Land & Plots in Kallakurichi District</p>
       </div>
 
-      {/* GRID */}
-      <div style={{
-        display:"grid",
-        gridTemplateColumns:"repeat(auto-fill,minmax(280px,1fr))",
-        gap:25,
-        padding:25,
-        maxWidth:1200,
-        margin:"0 auto"
-      }}>
-        {LISTINGS.map(i=>(
-          <Card key={i.id} item={i} onClick={()=>setModal(i.yt)} />
-        ))}
+      <div className="container">
+
+        {/* FILTER */}
+        <div className="filter">
+          <select onChange={e=>setLoc(e.target.value)}>
+            <option value="">All Locations</option>
+            <option>Kallakurichi</option>
+            <option>Sankarapuram</option>
+            <option>Chinnasalem</option>
+          </select>
+
+          <select onChange={e=>setType(e.target.value)}>
+            <option value="">All Types</option>
+            <option>Plot</option>
+            <option>Farm</option>
+            <option>Agricultural</option>
+          </select>
+        </div>
+
+        {/* GRID */}
+        <div className="grid">
+          {paginated.map(i=>(
+            <Card key={i.id} item={i} open={setModal}/>
+          ))}
+        </div>
+
+        {/* PAGINATION */}
+        <div className="pagination">
+          {[...Array(totalPages)].map((_,i)=>(
+            <button key={i} onClick={()=>setPage(i+1)}>
+              {i+1}
+            </button>
+          ))}
+        </div>
+
       </div>
 
-      {/* MODAL */}
-      {modal && <Modal video={modal} onClose={()=>setModal(null)} />}
+      {modal && <Modal video={modal} onClose={()=>setModal(null)}/>}
     </div>
   );
 }
 
-// Render
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 </script>
