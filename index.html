@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>TN15 Property | Land for Sale in Kallakurichi</title>
 
-<meta name="description" content="Verified land, farm land & plots in Kallakurichi district. Watch video tours and contact directly via WhatsApp." />
+<meta name="description" content="Verified land, farm land & plots in Kallakurichi district. Watch video tours and contact directly via WhatsApp or phone." />
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -15,8 +15,6 @@
 
 <style>
 body { margin:0; font-family:'DM Sans', sans-serif; background:#f6f1e8; }
-h1,h2,h3 { margin:0; }
-
 .container { max-width:1200px; margin:auto; padding:20px; }
 
 .grid {
@@ -52,6 +50,7 @@ h1,h2,h3 { margin:0; }
   flex-wrap:wrap;
   margin-bottom:20px;
 }
+
 select {
   padding:8px;
   border-radius:6px;
@@ -69,11 +68,29 @@ select {
   border-radius:5px;
   cursor:pointer;
 }
+
+/* Sticky WhatsApp */
+.whatsapp {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:#fff;
+  padding:12px 16px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:bold;
+  z-index:999;
+}
 </style>
 </head>
 
 <body>
+
 <div id="root"></div>
+
+<!-- Sticky WhatsApp -->
+<a href="https://wa.me/919884346789" class="whatsapp">WhatsApp</a>
 
 <script type="text/babel">
 
@@ -84,12 +101,15 @@ const BRAND = {
   amber:"#c8973a"
 };
 
-// Replace with your number
 const WHATSAPP = "919884346789";
 
 // DATA
 const LISTINGS = [
-  { id:1, yt:"hAlETgO7l-k", title:"Plots for Sale in Kallakurichi", loc:"Kallakurichi", type:"Plot", price:"₹10L/cent"}
+  { id:1, yt:"hAlETgO7l-k", title:"Plots in Kallakurichi", loc:"Kallakurichi", type:"Plot", price:"₹10L/cent"},
+  { id:2, yt:"ysz5S6PUM-U", title:"Farm Land near Sankarapuram", loc:"Sankarapuram", type:"Farm", price:"₹8L/acre"},
+  { id:3, yt:"ScMzIvxBSi4", title:"Agricultural Land Chinnasalem", loc:"Chinnasalem", type:"Agricultural", price:"₹6L/acre"},
+  { id:4, yt:"aqz-KE-bpKQ", title:"DTCP Approved Plots", loc:"Kallakurichi", type:"Plot", price:"₹12L/cent"},
+  { id:5, yt:"dQw4w9WgXcQ", title:"Highway Facing Land", loc:"Sankarapuram", type:"Farm", price:"₹15L/acre"}
 ];
 
 function Modal({ video, onClose }) {
@@ -99,8 +119,11 @@ function Modal({ video, onClose }) {
       display:"flex", alignItems:"center", justifyContent:"center"
     }}>
       <div onClick={e=>e.stopPropagation()} style={{width:"90%", maxWidth:800}}>
-        <iframe width="100%" height="450"
+        <iframe
+          width="100%"
+          height="450"
           src={`https://www.youtube-nocookie.com/embed/${video}?autoplay=1`}
+          title="Property Video"
           allow="autoplay; encrypted-media"
           allowFullScreen
         />
@@ -112,7 +135,20 @@ function Modal({ video, onClose }) {
 function Card({ item, open }) {
   return (
     <div className="card" onClick={()=>open(item.yt)}>
-      <img src={`https://img.youtube.com/vi/${item.yt}/hqdefault.jpg`} width="100%"/>
+
+      <div style={{position:"relative"}}>
+        <img src={`https://img.youtube.com/vi/${item.yt}/hqdefault.jpg`} width="100%"/>
+        <div style={{
+          position:"absolute",
+          top:"50%", left:"50%",
+          transform:"translate(-50%,-50%)",
+          background:"rgba(0,0,0,0.6)",
+          color:"#fff",
+          padding:"10px 15px",
+          borderRadius:"50%"
+        }}>▶</div>
+      </div>
+
       <div style={{padding:15}}>
         <div style={{color:BRAND.amber, fontSize:12, fontWeight:700}}>{item.type}</div>
         <h3>{item.title}</h3>
@@ -120,7 +156,7 @@ function Card({ item, open }) {
         <div style={{color:BRAND.green, fontWeight:700}}>{item.price}</div>
 
         <a
-          href={`https://wa.me/${WHATSAPP}?text=Interested in ${item.title}`}
+          href={`https://wa.me/${WHATSAPP}?text=Interested in ${item.title} at ${item.loc} (${item.price})`}
           target="_blank"
           className="btn btn-wa"
           onClick={e=>e.stopPropagation()}
@@ -149,32 +185,57 @@ function App() {
 
   const totalPages = Math.ceil(filtered.length/perPage);
 
-  const paginated = filtered.slice(
-    (page-1)*perPage,
-    page*perPage
-  );
+  const paginated = filtered.slice((page-1)*perPage,page*perPage);
 
   return (
     <div>
 
       {/* HEADER */}
-      <div style={{background:BRAND.green, color:"#fff", padding:30, textAlign:"center"}}>
-        <h1>TN15 Property</h1>
-        <p>Land & Plots in Kallakurichi District</p>
+      <div style={{background:BRAND.green, color:"#fff", padding:"15px 20px"}}>
+        <div style={{
+          maxWidth:1200, margin:"auto",
+          display:"flex", justifyContent:"space-between", alignItems:"center"
+        }}>
+
+          <a href="/">
+            <img src="logo.png" alt="TN15 Property" style={{height:50}}/>
+          </a>
+
+          <a href="tel:+919884346789" style={{
+            background:BRAND.amber,
+            padding:"8px 14px",
+            borderRadius:"6px",
+            color:"#000",
+            textDecoration:"none",
+            fontWeight:"700"
+          }}>
+            📞 Call Now
+          </a>
+
+        </div>
+      </div>
+
+      {/* SEO TEXT */}
+      <div className="container">
+        <h2>Land for Sale in Kallakurichi</h2>
+        <p>
+          Explore verified plots, farm land, and agricultural land in Kallakurichi,
+          Sankarapuram, and Chinnasalem. Direct owner listings with WhatsApp contact.
+        </p>
       </div>
 
       <div className="container">
 
         {/* FILTER */}
         <div className="filter">
-          <select onChange={e=>setLoc(e.target.value)}>
+          <select onChange={e=>{setLoc(e.target.value); setPage(1);}}>
             <option value="">All Locations</option>
             <option>Kallakurichi</option>
             <option>Sankarapuram</option>
             <option>Chinnasalem</option>
           </select>
 
-          <select onChange={e=>setType(e.target.value)}>
+          <select onChange={e=>{setType(e.target.value); setPage(1);}}>
             <option value="">All Types</option>
             <option>Plot</option>
             <option>Farm</option>
@@ -201,6 +262,7 @@ function App() {
       </div>
 
       {modal && <Modal video={modal} onClose={()=>setModal(null)}/>}
+
     </div>
   );
 }
