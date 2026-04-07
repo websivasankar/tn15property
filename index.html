@@ -194,12 +194,59 @@ function App() {
       <div style={{background:BRAND.green, color:"#fff", padding:"15px 20px"}}>
         <div style={{
           maxWidth:1200, margin:"auto",
-          display:"flex", justifyContent:"space-between", alignItems:"center"
+          display:"flex",
+justifyContent:"space-between",
+alignItems:"center",
+flexWrap:"wrap",
+gap:"10px"
         }}>
 
-          <a href="/">
-            <img src="logo.png" alt="TN15 Property" style={{height:50}}/>
-          </a>
+<a href="/" style={{ textDecoration:"none" }}>
+  <div style={{
+    display:"flex",
+    flexDirection:"column",
+    lineHeight:"1"
+  }}>
+    
+    <div style={{
+      display:"flex",
+      alignItems:"baseline",
+      gap:"4px"
+    }}>
+      <span style={{
+        fontSize:"26px",
+        fontWeight:"900",
+        color:"#f5c542"
+      }}>
+        TN15
+      </span>
+
+      <span style={{
+        fontSize:"20px",
+        fontWeight:"700",
+        color:"#ffffff"
+      }}>
+        Property
+      </span>
+
+      <span style={{
+        fontSize:"14px",
+        color:"#ddd"
+      }}>
+        .com
+      </span>
+    </div>
+
+    <span style={{
+      fontSize:"10px",
+      color:"#ccc",
+      marginTop:"2px"
+    }}>
+      Kallakurichi Lands & Plots
+    </span>
+
+  </div>
+</a>
 
           <a href="tel:+919884346789" style={{
             background:BRAND.amber,
